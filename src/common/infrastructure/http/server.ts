@@ -1,10 +1,16 @@
 /* eslint-disable prettier/prettier */
-
+import { env } from '../env'
+import { dataSource } from '../typeorm'
 import { app } from './app'
 
-const PORT = 3030
-
-app.listen(PORT, () => {
-  console.log(`Servidor online! na Porta: ${PORT}`)
-})
-console.log('Olá Dev! Test')
+dataSource
+  .initialize()
+  .then(() => {
+    app.listen(env.PORT, () => {
+      console.log(`Server running on port ${env.PORT}! 🏆`)
+      console.log('API docs available at GET /docs 📚')
+    })
+  })
+  .catch(error => {
+    console.error('Error initializing data source:', error)
+  })

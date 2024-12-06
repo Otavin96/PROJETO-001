@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { AppError } from '@/common/domain/erros/app-error'
 import 'dotenv/config'
+
 import { z } from 'zod'
 
 const envSchema = z.object({

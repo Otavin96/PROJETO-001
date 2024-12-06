@@ -21,8 +21,8 @@ export class Tool implements ToolsModel {
   stockMax: number
   @Column('int')
   stockMin: number
-  @CreateDateColumn('created_at')
+  @CreateDateColumn({ name: 'created_at' })
   created_at: Date
-  @CreateDateColumn('updated_at')
+  @CreateDateColumn({ name: 'updated_at' })
   updated_at: Date
 }

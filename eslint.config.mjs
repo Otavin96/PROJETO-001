@@ -5,6 +5,13 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default [
   { files: ['**/*.{js,mjs,cjs,ts}'] },
+  "prettier/prettier": [
+    "error",
+    {
+      "singleQuote": true,
+      "parser": "flow"
+    }
+  ],
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,

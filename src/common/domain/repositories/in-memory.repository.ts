@@ -99,7 +99,6 @@ export abstract class InMemoryRepository<Model extends ModelProps>
       if (a[sort] < b[sort]) {
         return sort_dir === 'asc' ? -1 : 1
       }
-
       if (a[sort] > b[sort]) {
         return sort_dir === 'asc' ? 1 : -1
       }

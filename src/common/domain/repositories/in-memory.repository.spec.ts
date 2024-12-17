@@ -127,29 +127,7 @@ describe('InMemoryRepository unit test', () => {
 
   describe('applyFilter', () => {
     it('should no filter items when filter param is null', async () => {
-      const items = [
-        {
-          id: randomUUID(),
-          description: 'test',
-          type: 'serra',
-          created_at,
-          updated_at,
-        },
-        {
-          id: randomUUID(),
-          description: 'TEST',
-          type: 'Fresa',
-          created_at,
-          updated_at,
-        },
-        {
-          id: randomUUID(),
-          description: 'fake',
-          type: 'Broca',
-          created_at,
-          updated_at,
-        },
-      ]
+      const items = [model]
       const spyFilterMethod = jest.spyOn(items, 'filter' as any)
       const result = await sut['applyFilter'](items, null)
       expect(spyFilterMethod).not.toHaveBeenCalled()
@@ -194,9 +172,7 @@ describe('InMemoryRepository unit test', () => {
       expect(spyFilterMethod).toHaveBeenCalledTimes(3)
       expect(result).toHaveLength(0)
     })
-  })
 
-  describe('applySort', () => {
     it('Should not sort items', async () => {
       const items = [
         {
@@ -263,11 +239,278 @@ describe('InMemoryRepository unit test', () => {
         },
       ]
 
+      // let result = await sut['applySort'](items, 'description', 'desc')
+      // expect(result).toStrictEqual([items[2], items[1], items[0]])
+
       let result = await sut['applySort'](items, 'description', 'asc')
       expect(result).toStrictEqual([items[0], items[1], items[2]])
+    })
+  })
 
-      result = await sut['applySort'](items, 'description', 'desc')
-      expect(result).toStrictEqual([items[0], items[1], items[2]])
+  describe('applyPaginate', () => {
+    it('Should paginate items', async () => {
+      const items = [
+        {
+          id: randomUUID(),
+          description: 'a',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'b',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'c',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'd',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'e',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+      ]
+
+      let result = await sut['applyPaginate'](items, 1, 2)
+      expect(result).toStrictEqual([items[0], items[1]])
+
+      result = await sut['applyPaginate'](items, 2, 2)
+      expect(result).toStrictEqual([items[2], items[3]])
+
+      result = await sut['applyPaginate'](items, 2, 3)
+      expect(result).toStrictEqual([items[3], items[4]])
+    })
+  })
+
+  describe('search', () => {
+    it('Should paginate items', async () => {
+      const items = Array(16).fill(model)
+      sut.items = items
+
+      const result = await sut.search({})
+      expect(result).toStrictEqual({
+        items: Array(15).fill(model),
+        total: 16,
+        current_page: 1,
+        per_page: 15,
+        sort: null,
+        sort_dir: null,
+        filter: null,
+      })
+    })
+
+    it('Should apply paginate and filter', async () => {
+      const items = [
+        {
+          id: randomUUID(),
+          description: 'test',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'b',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'TEST',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'TeSt',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+      ]
+      sut.items = items
+
+      const result = await sut.search({
+        page: 1,
+        per_page: 2,
+        filter: 'test',
+      })
+      expect(result).toStrictEqual({
+        items: [items[0], items[2]],
+        total: 3,
+        current_page: 1,
+        per_page: 2,
+        sort: null,
+        sort_dir: null,
+        filter: 'test',
+      })
+    })
+
+    it('Should apply paginate and sort', async () => {
+      const items = [
+        {
+          id: randomUUID(),
+          description: 'b',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'a',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'd',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'e',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'c',
+          type: 'Broca',
+          created_at,
+          updated_at,
+        },
+      ]
+      sut.items = items
+
+      let result = await sut.search({
+        page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'asc',
+      })
+      expect(result).toStrictEqual({
+        items: [items[1], items[0]],
+        total: 5,
+        current_page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'asc',
+        filter: null,
+      })
+
+      result = await sut.search({
+        page: 2,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'asc',
+      })
+      expect(result).toStrictEqual({
+        items: [items[4], items[2]],
+        total: 5,
+        current_page: 2,
+        per_page: 2,
+        sort: 'name',
+        sort_dir: 'asc',
+        filter: null,
+      })
+    })
+
+    it('Should search using filter, sort and paginate', async () => {
+      const items = [
+        {
+          id: randomUUID(),
+          description: 'TEST',
+          type: 'broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'a',
+          type: 'Serra',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'test',
+          type: 'Fresa',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'e',
+          type: 'broca',
+          created_at,
+          updated_at,
+        },
+        {
+          id: randomUUID(),
+          description: 'TeSt',
+          type: 'Serra',
+          created_at,
+          updated_at,
+        },
+      ]
+      sut.items = items
+
+      let result = await sut.search({
+        page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'asc',
+        filter: 'TEST',
+      })
+      expect(result).toStrictEqual({
+        items: [items[0], items[2]],
+        total: 3,
+        current_page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'asc',
+        filter: 'TEST',
+      })
+
+      result = await sut.search({
+        page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'desc',
+        filter: 'test',
+      })
+
+      expect(result).toStrictEqual({
+        items: [items[0], items[2]],
+        total: 3,
+        current_page: 1,
+        per_page: 2,
+        sort: 'description',
+        sort_dir: 'desc',
+        filter: 'test',
+      })
     })
   })
 })

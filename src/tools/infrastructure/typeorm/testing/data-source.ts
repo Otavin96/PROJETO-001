@@ -1,5 +1,5 @@
-import { env } from '@/common/infrastructure/env'
 import { DataSource } from 'typeorm'
+import { env } from '@/common/infrastructure/env'
 
 export const testDataSource = new DataSource({
   type: env.DB_TYPE,

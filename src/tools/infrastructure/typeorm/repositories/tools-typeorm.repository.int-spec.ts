@@ -14,7 +14,7 @@ describe('ToolsTypeormRepository integration tests', () => {
     typeormEntityManager = testDataSource.createEntityManager()
   })
 
-  afterAll(async () => {
+   afterAll(async () => {
     await testDataSource.destroy()
   })
 
@@ -24,6 +24,7 @@ describe('ToolsTypeormRepository integration tests', () => {
       typeormEntityManager.getRepository(Tool),
     )
   })
+  
 
   describe('findById', () => {
     it('should geneate an error when the tool is not found', async () => {
@@ -45,5 +46,29 @@ describe('ToolsTypeormRepository integration tests', () => {
     })
   })
 
-  describe('create', () => {})
+  describe('create', () => {
+    it('should create a new Tool object', () => {
+      const data = ToolsDataBuilder({ description: 'Tool 1' })
+      const result = ormRepository.create(data)
+      expect(result.description).toStrictEqual(data.description)
+    })
+  })
+
+  describe('insert', () => {
+    it('should insert a new Tool object', async () => {
+      const data = ToolsDataBuilder({ description: 'Tool 1' })
+      const result = await ormRepository.insert(data)
+      expect(result.description).toStrictEqual(data.description)
+    })
+  })
+
+  describe('update', () => {
+    it('should generate an error when  the tool is not found', async () => {
+      const data = ToolsDataBuilder({})
+      
+     await expect(ormRepository.update(data)).rejects.toThrow(
+      new NotFoundError(`Tool not found using ID ${data.id}`)
+     )
+    })
+  })
 })

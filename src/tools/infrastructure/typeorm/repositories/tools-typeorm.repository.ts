@@ -19,13 +19,11 @@ export class ToolsTypeormRepository implements ToolsRepository {
   constructor(private toolsRepository: Repository<Tool>) {}
 
   async findByDescription(description: string): Promise<ToolsModel> {
-    const tools = this.toolsRepository.findOneBy({ description })
-
-    if (!tools) {
+    const tool = await this.toolsRepository.findOne({ where: { description } })
+    if (!tool) {
       throw new NotFoundError(`Tool not found using description ${description}`)
     }
-
-    return tools
+    return tool
   }
 
   async findAllByIds(toolIds: ToolId[]): Promise<ToolsModel[]> {
@@ -68,21 +66,25 @@ export class ToolsTypeormRepository implements ToolsRepository {
       (props.sort_dir && dirOps.includes(props.sort_dir.toLowerCase())) || false
     const orderByField = validSort ? props.sort : 'created_at'
     const orderByDir = validSortDir ? props.sort_dir : 'desc'
-
-    const [tools, total] = await this.toolsRepository.findAndCount({
-      ...(props.filter && { where: { description: ILike(props.filter) } }),
-      order: { [orderByField]: orderByDir },
+    const [users, total] = await this.toolsRepository.findAndCount({
+      ...(props.filter && {
+        where: {
+          description: ILike(props.filter),
+        },
+      }),
+      order: {
+        [orderByField]: orderByDir,
+      },
       skip: (props.page - 1) * props.per_page,
       take: props.per_page,
     })
-
     return {
-      items: tools,
+      items: users,
       per_page: props.per_page,
       total,
       current_page: props.page,
-      sort: orderByField,
-      sort_dir: orderByDir,
+      sort: props.sort,
+      sort_dir: props.sort_dir,
       filter: props.filter,
     }
   }

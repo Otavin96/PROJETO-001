@@ -12,11 +12,16 @@ import { ILike, In, Repository } from 'typeorm'
 import { Tool } from '../entities/tools.entities'
 import { NotFoundError } from '@/common/domain/erros/not-found-error'
 import { ConflictError } from '@/common/domain/erros/conflict-error'
+import { inject, injectable } from 'tsyringe'
 
+@injectable()
 export class ToolsTypeormRepository implements ToolsRepository {
   sortableFields: string[] = ['description', 'created_at']
 
-  constructor(private toolsRepository: Repository<Tool>) {}
+  constructor(
+    @inject('ToolsDefaultTypeormRepository')
+    private toolsRepository: Repository<Tool>,
+  ) {}
 
   async findByDescription(description: string): Promise<ToolsModel> {
     const tool = await this.toolsRepository.findOne({ where: { description } })
@@ -35,7 +40,7 @@ export class ToolsTypeormRepository implements ToolsRepository {
     return toolsFound
   }
   async confinctingDescription(description: string): Promise<void> {
-    const tools = this.toolsRepository.findOneBy({ description })
+    const tools = await this.toolsRepository.findOneBy({ description })
 
     if (tools) {
       throw new ConflictError(`Description already used by another tools`)

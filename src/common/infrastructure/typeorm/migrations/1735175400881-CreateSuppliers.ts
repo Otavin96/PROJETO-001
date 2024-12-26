@@ -1,12 +1,11 @@
-/* eslint-disable prettier/prettier */
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateTools1733106950381 implements MigrationInterface {
+export class CreateSuppliers1735175400881 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
     await queryRunner.createTable(
       new Table({
-        name: 'tools',
+        name: 'suppliers',
         columns: [
           {
             name: 'id',
@@ -16,25 +15,13 @@ export class CreateTools1733106950381 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'description',
+            name: 'name',
             type: 'varchar',
             isUnique: true,
           },
           {
-            name: 'type',
+            name: 'description',
             type: 'varchar',
-          },
-          {
-            name: 'quantity',
-            type: 'int',
-          },
-          {
-            name: 'stockMax',
-            type: 'int',
-          },
-          {
-            name: 'stockMin',
-            type: 'int',
           },
           {
             name: 'created_at',
@@ -52,6 +39,6 @@ export class CreateTools1733106950381 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('tools')
+    await queryRunner.dropTable('suppliers')
   }
 }

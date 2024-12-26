@@ -113,4 +113,5 @@ export class SuppliersTypeormRepository implements SuppliersRepository {
 
     return supplier
   }
+
 }

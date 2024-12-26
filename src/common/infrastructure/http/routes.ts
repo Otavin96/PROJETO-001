@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { supplierRouter } from '@/suppliers/infrastructure/http/routes/supplier.route'
 import { toolsRouter } from '@/tools/infrastructure/http/routes/tools.route'
 import Router from 'express'
 
@@ -9,5 +10,6 @@ routes.get('/', (req, res) => {
 })
 
 routes.use('/tools', toolsRouter)
+routes.use('/suppliers', supplierRouter)
 
 export { routes }

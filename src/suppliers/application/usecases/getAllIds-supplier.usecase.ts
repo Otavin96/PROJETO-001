@@ -17,7 +17,7 @@
 //     ){}
 
 //     async execute(input: Input): Promise<Output> {
-//       const supplier = await this.suppliersRepository.
+//       const supplier = await this.suppliersRepository
 //     }
 //   }
 // }

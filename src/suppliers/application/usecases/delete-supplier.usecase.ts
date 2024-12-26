@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { SuppliersRepository } from '@/suppliers/repositories/suppliers.repository'
 import { inject, injectable } from 'tsyringe'
 

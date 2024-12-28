@@ -5,21 +5,21 @@ import { NotFoundError } from '@/common/domain/erros/not-found-error'
 
 describe('GetSuppplierUseCase unit tests', () => {
   let sut: GetSupplierUseCase.UseCase
-  let repostirory: SuppliersRepository
+  let repository: SuppliersRepository
 
   beforeEach(() => {
-    repostirory = new SuppliersInMemoryRepository()
-    sut = new GetSupplierUseCase.UseCase(repostirory)
+    repository = new SuppliersInMemoryRepository()
+    sut = new GetSupplierUseCase.UseCase(repository)
   })
 
   it('Should be able to get a supplier', async () => {
-    const spyFindById = jest.spyOn(repostirory, 'findById')
+    const spyFindById = jest.spyOn(repository, 'findById')
     const props = {
       name: 'Diamantec',
       description: 'Fornecedor de Serras e Fresas',
     }
-    const model = repostirory.create(props)
-    await repostirory.insert(model)
+    const model = repository.create(props)
+    await repository.insert(model)
 
     const result = await sut.execute({ id: model.id })
     expect(result).toMatchObject(model)

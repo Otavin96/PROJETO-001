@@ -12,7 +12,6 @@ import {
 } from '@/suppliers/repositories/suppliers.repository'
 import { inject, injectable } from 'tsyringe'
 import { ILike, In, Repository } from 'typeorm'
-import { Supplier } from '../entities/suppliers.entities'
 
 @injectable()
 export class SuppliersTypeormRepository implements SuppliersRepository {

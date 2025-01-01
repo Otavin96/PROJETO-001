@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export interface ToolsModel {
   id: string
   description: string
@@ -6,6 +5,7 @@ export interface ToolsModel {
   quantity: number
   stockMax: number
   stockMin: number
+  status: string
   created_at: Date
   updated_at: Date
 }

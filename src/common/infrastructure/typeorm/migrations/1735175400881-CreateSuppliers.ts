@@ -24,6 +24,18 @@ export class CreateSuppliers1735175400881 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'contact_email',
+            type: 'varchar',
+          },
+          {
+            name: 'phone',
+            type: 'varchar',
+          },
+          {
+            name: 'status',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',

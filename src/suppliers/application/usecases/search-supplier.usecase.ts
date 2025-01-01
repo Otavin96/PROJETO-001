@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { SearchInput } from '@/common/domain/repositories/repository.interface'
 import { SuppliersModel } from '@/suppliers/domain/models/suppliers.model'
 import { SuppliersRepository } from '@/suppliers/repositories/suppliers.repository'

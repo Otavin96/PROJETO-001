@@ -12,6 +12,7 @@ export type CreateToolProps = {
   quantity: number
   stockMax: number
   stockMin: number
+  status: string
   created_at?: Date
   updated_at?: Date
 }

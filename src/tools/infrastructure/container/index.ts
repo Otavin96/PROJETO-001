@@ -6,6 +6,7 @@ import { CreateToolUseCase } from '@/tools/application/usecases/create-tool.usec
 import { GetToolUseCase } from '@/tools/application/usecases/get-tool.usecase'
 import { DeleteToolUseCase } from '@/tools/application/usecases/delete-tool.usecase'
 import { UpdateToolUseCase } from '@/tools/application/usecases/update-tool.usercase'
+import { SearchToolUseCase } from '@/tools/application/usecases/search-tool.usecase'
 
 // Registro do repositório Tool
 container.registerSingleton('ToolRepository', ToolsTypeormRepository)
@@ -21,6 +22,9 @@ container.registerSingleton('DeleteToolUseCase', DeleteToolUseCase.UseCase)
 
 // Registro do caso de uso UpdateToolUseCase
 container.registerSingleton('UpdateToolUseCase', UpdateToolUseCase.UseCase)
+
+// Registro do caso de uso SearchToolUseCase
+container.registerSingleton('SearchToolUseCase', SearchToolUseCase.UseCase)
 
 // Registro do repositório padrão TypeORM (se necessário em outro lugar)
 container.registerInstance(

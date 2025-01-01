@@ -5,6 +5,7 @@ export type ToolOutput = {
   quantity: number
   stockMin: number
   stockMax: number
+  status: string
   created_at: Date
   updated_at: Date
 }

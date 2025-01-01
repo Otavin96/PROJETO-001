@@ -1,13 +1,15 @@
-import { UsersModel } from '@/users/domain/models/users.model'
+import { StockMovement } from '@/stockMovements/infrasctructure/typeorm/entities/stockMovements.entities'
 import {
   Column,
-  CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm'
 
 @Entity('users')
-export class User implements UsersModel {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -20,12 +22,15 @@ export class User implements UsersModel {
   @Column()
   password: string
 
-  @Column()
+  @Column({ nullable: true })
   avatar?: string
+
+  @OneToMany(() => StockMovement, stockMovement => stockMovement.user_id)
+  stockMovements: StockMovement[]
 
   @CreateDateColumn()
   created_at: Date
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date
 }

@@ -10,6 +10,7 @@ export function ToolsDataBuilder(props: Partial<ToolsModel>): ToolsModel {
     quantity: props.quantity ?? 10,
     stockMax: props.stockMax ?? 20,
     stockMin: props.stockMin ?? 5,
+    status: props.status ?? 'ativo',
     created_at: props.created_at ?? new Date(),
     updated_at: props.updated_at ?? new Date(),
   }

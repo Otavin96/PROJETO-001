@@ -7,6 +7,9 @@ export namespace CreateSupplierUseCase {
   export type Input = {
     name: string
     description: string
+    contact_email: string
+    phone: string
+    status: string
   }
 
   export type Output = SupplierOutput
@@ -19,7 +22,13 @@ export namespace CreateSupplierUseCase {
     ) {}
 
     async execute(input: Input): Promise<Output> {
-      if (!input.name || !input.description) {
+      if (
+        !input.name ||
+        !input.description ||
+        !input.contact_email ||
+        !input.phone ||
+        !input.status
+      ) {
         throw new BadRequestError('Input data not provided or invalid')
       }
 

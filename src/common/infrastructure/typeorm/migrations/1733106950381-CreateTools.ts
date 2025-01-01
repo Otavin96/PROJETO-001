@@ -37,6 +37,10 @@ export class CreateTools1733106950381 implements MigrationInterface {
             type: 'int',
           },
           {
+            name: 'status',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',

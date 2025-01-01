@@ -11,9 +11,12 @@ export async function createSupplierController(
   const createSupplierBodySchema = z.object({
     name: z.string(),
     description: z.string(),
+    contact_email: z.string(),
+    phone: z.string(),
+    status: z.string(),
   })
 
-  const { name, description } = dataValidation(
+  const { name, description, contact_email, phone, status } = dataValidation(
     createSupplierBodySchema,
     request.body,
   )
@@ -22,7 +25,13 @@ export async function createSupplierController(
   const createSupplierUseCase: CreateSupplierUseCase.UseCase =
     container.resolve('CreateSupplierUseCase')
 
-  const supplier = await createSupplierUseCase.execute({ name, description })
+  const supplier = await createSupplierUseCase.execute({
+    name,
+    description,
+    contact_email,
+    phone,
+    status,
+  })
 
   return response.status(201).json(supplier)
 }

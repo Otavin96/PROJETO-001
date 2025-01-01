@@ -10,6 +10,7 @@ export namespace CreateToolUseCase {
     quantity: number
     stockMin: number
     stockMax: number
+    status: string
   }
 
   export type Output = ToolOutput
@@ -27,7 +28,8 @@ export namespace CreateToolUseCase {
         !input.type ||
         input.quantity <= 0 ||
         input.stockMin <= 0 ||
-        input.stockMax <= 0
+        input.stockMax <= 0 ||
+        !input.status
       ) {
         throw new BadRequestError('Input data not provided or invalid')
       }

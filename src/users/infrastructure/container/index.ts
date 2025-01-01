@@ -6,6 +6,7 @@ import { CreateUsersUseCase } from '@/users/application/usecases/create-user.use
 import { GetUsersUseCase } from '@/users/application/usecases/get-user.usecase'
 import { UpdateUserUseCase } from '@/users/application/usecases/update-user.usecase'
 import { DeleteUserUseCase } from '@/users/application/usecases/delete-user.usecase'
+import { SearchUserUseCase } from '@/users/application/usecases/search-user.usecase'
 
 container.registerSingleton('UsersRepository', UsersTypeormRepository)
 
@@ -22,4 +23,4 @@ container.registerSingleton('UpdateUsersUseCase', UpdateUserUseCase.UseCase)
 
 container.registerSingleton('DeleteUsersUseCase', DeleteUserUseCase.UseCase)
 
-//container.registerSingleton('SearchUsersUseCase', SearchUsersUseCase.UseCase)
+container.registerSingleton('SearchUserUseCase', SearchUserUseCase.UseCase)

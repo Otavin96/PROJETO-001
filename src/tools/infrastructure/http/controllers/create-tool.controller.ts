@@ -14,12 +14,11 @@ export async function createToolController(
     quantity: z.number(),
     stockMin: z.number(),
     stockMax: z.number(),
+    status: z.string(),
   })
 
-  const { description, type, quantity, stockMin, stockMax } = dataValidation(
-    createToolBodySchema,
-    request.body,
-  )
+  const { description, type, quantity, stockMin, stockMax, status } =
+    dataValidation(createToolBodySchema, request.body)
 
   container.resolve('ToolRepository')
   const createToolUseCase: CreateToolUseCase.UseCase =
@@ -31,6 +30,7 @@ export async function createToolController(
     quantity,
     stockMin,
     stockMax,
+    status,
   })
 
   return response.status(201).json(tool)

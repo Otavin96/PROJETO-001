@@ -18,6 +18,9 @@ describe('CreateSupplierUseCase unit tests', () => {
     const props = {
       name: 'Diamantec',
       description: 'Fornecedor de Serras e Fresas',
+      contact_email: 'fornecedor@teste.com',
+      phone: '554988010148',
+      status: 'ativo',
     }
     const result = await sut.execute(props)
     expect(result.id).toBeDefined
@@ -29,6 +32,9 @@ describe('CreateSupplierUseCase unit tests', () => {
     const props = {
       name: 'Diamantec',
       description: 'Fornecedor de Serras e Fresas',
+      contact_email: 'fornecedor@teste.com',
+      phone: '554988010148',
+      status: 'ativo',
     }
 
     await sut.execute(props)
@@ -39,6 +45,9 @@ describe('CreateSupplierUseCase unit tests', () => {
     const props = {
       name: null,
       description: 'Fornecedor de Serras e Fresas',
+      contact_email: 'fornecedor@teste.com',
+      phone: '554988010148',
+      status: 'ativo',
     }
     await expect(sut.execute(props)).rejects.toBeInstanceOf(BadRequestError)
   })

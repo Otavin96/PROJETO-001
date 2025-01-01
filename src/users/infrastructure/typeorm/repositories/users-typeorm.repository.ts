@@ -1,5 +1,6 @@
 import { ConflictError } from '@/common/domain/erros/conflict-error'
 import { NotFoundError } from '@/common/domain/erros/not-found-error'
+import { UnauthorizedError } from '@/common/domain/erros/unauthorized-error'
 import {
   SearchInput,
   SearchOutput,
@@ -9,6 +10,7 @@ import {
   CreateUsersProps,
   UsersRepository,
 } from '@/users/repositories/users.repository'
+import { compare } from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 import { ILike, Repository } from 'typeorm'
 
@@ -47,6 +49,22 @@ export class UsersTypeormRepository implements UsersRepository {
     if (user) {
       throw new ConflictError('Email already used on another user')
     }
+  }
+
+  async session(email: string, password: string): Promise<UsersModel> {
+    const user = await this.findByEmail(email)
+
+    if (!user) {
+      throw new UnauthorizedError('Incorrect email/password')
+    }
+
+    const passwordConfirmed = await compare(password, user.password)
+
+    if (!passwordConfirmed) {
+      throw new UnauthorizedError('Incorrect email/password')
+    }
+
+    return user
   }
 
   create(props: CreateUsersProps): UsersModel {

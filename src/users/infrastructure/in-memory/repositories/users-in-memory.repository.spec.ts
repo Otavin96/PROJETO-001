@@ -2,6 +2,7 @@ import { NotFoundError } from '@/common/domain/erros/not-found-error'
 import { UsersInMemoryRepository } from './users-in-memory.repository'
 import { UsersDataBuilder } from '../../testing/helpers/users-data-build'
 import { ConflictError } from '@/common/domain/erros/conflict-error'
+import { UnauthorizedError } from '@/common/domain/erros/unauthorized-error'
 
 describe('UsersInMemoryRepository unit tests', () => {
   let sut: UsersInMemoryRepository
@@ -61,6 +62,15 @@ describe('UsersInMemoryRepository unit tests', () => {
       await sut.conflictingEmail('a@a.com')
     })
   })
+
+  // describe('session', () => {
+  //   it('should throw error when email found', async () => {
+  //     const user = UsersDataBuilder({ email: 'a@a.com', password: '123456' })
+  //     const data = await sut.insert(user)
+
+  //     const result = await sut.session(user)
+  //   })
+  // })
 
   describe('applyFilter', () => {
     it('should no filter items when filter object is null', async () => {

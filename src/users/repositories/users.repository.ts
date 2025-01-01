@@ -12,4 +12,5 @@ export interface UsersRepository
   findByEmail(email: string): Promise<UsersModel>
   findByName(name: string): Promise<UsersModel>
   conflictingEmail(email: string): Promise<void>
+  session(email: string, password: string): Promise<UsersModel>
 }

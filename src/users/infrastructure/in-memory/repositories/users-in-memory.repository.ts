@@ -1,5 +1,6 @@
 import { ConflictError } from '@/common/domain/erros/conflict-error'
 import { NotFoundError } from '@/common/domain/erros/not-found-error'
+import { UnauthorizedError } from '@/common/domain/erros/unauthorized-error'
 import { InMemoryRepository } from '@/common/domain/repositories/in-memory.repository'
 import { UsersModel } from '@/users/domain/models/users.model'
 import { UsersRepository } from '@/users/repositories/users.repository'
@@ -36,6 +37,24 @@ export class UsersInMemoryRepository
     if (user) {
       throw new ConflictError('Email already used on another user.')
     }
+  }
+
+  async session(email: string, password: string): Promise<UsersModel> {
+    const user = this.findByEmail(email)
+
+    if (!user) {
+      throw new UnauthorizedError('Incorrect email/password')
+    }
+
+    const passwordConfirmed = this.items.find(
+      item => item.password === password,
+    )
+
+    if (!passwordConfirmed) {
+      throw new UnauthorizedError('Incorrect email/password')
+    }
+
+    return user
   }
 
   protected async applyFilter(

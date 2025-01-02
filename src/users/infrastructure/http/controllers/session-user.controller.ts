@@ -32,6 +32,8 @@ export async function sessionUserController(
     .status(201)
     .json([
       { user },
-      { message: `Usuário logado com sucesso! Seja bem vindo: ${user.name}` },
+      {
+        message: `Usuário logado com sucesso! Seja bem vindo: ${user.user.name}`,
+      },
     ])
 }

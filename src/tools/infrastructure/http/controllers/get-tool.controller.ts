@@ -9,6 +9,8 @@ export async function getToolController(request: Request, response: Response) {
     id: z.string(),
   })
 
+  console.log(request.user.id)
+
   const { id } = dataValidation(getToolParamSchema, request.params)
 
   const getToolUseCase: GetToolUseCase.UseCase =

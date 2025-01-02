@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "eb0b7643-1eb2-48d2-ad5a-b30fca5a6e32",
+		"name": "Sistema de Estoque",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35373665"
+	},
+	"item": [
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "cadastrar Tool",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Broca 10MM Direita CT 70 C50 H20 de Widea N Passante\",\r\n    \"type\": \"Broca\",\r\n    \"quantity\": 10,\r\n    \"stockMin\": 2,\r\n    \"stockMax\": 20,\r\n    \"status\": \"ativo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tools/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tools",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Tool",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tools/5129ff84-bc83-4691-a147-ca1820062904",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tools",
+								"5129ff84-bc83-4691-a147-ca1820062904"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisa e Paginação Ferramentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}} /tools/",
+							"host": [
+								"{{base_url}} "
+							],
+							"path": [
+								"tools",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Tool",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tools/434abf67-e864-475b-b889-2d284b73a333",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tools",
+								"434abf67-e864-475b-b889-2d284b73a333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Tool",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tools/a0ca8d40-6b2b-4790-a92a-2a284d292fb5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tools",
+								"a0ca8d40-6b2b-4790-a92a-2a284d292fb5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Cadastrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Token\",\r\n    \"email\": \"token@teste.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/86363302-a512-4e04-b372-ae49383e89b9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"86363302-a512-4e04-b372-ae49383e89b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/f05c9ce3-1b25-4cbb-acfb-4168788148ae",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"f05c9ce3-1b25-4cbb-acfb-4168788148ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"Email@atualizado.com\",\r\n    \"avatar\": \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fstablediffusionweb.com%2Fpt%2Fimage%2F20987055-steam-avatar-illustration&psig=AOvVaw2qp50vAcHG32Lq0SNCBvZQ&ust=1735434105034000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNiezP2hyYoDFQAAAAAdAAAAABAE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/f05c9ce3-1b25-4cbb-acfb-4168788148ae",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"f05c9ce3-1b25-4cbb-acfb-4168788148ae"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Suppliers",
+			"item": [
+				{
+					"name": "Cadastrar Supplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Basso\",\r\n    \"description\": \"Fornecedor de Ferramentas para ramo Moveleiro, como Fresas, Brocas\",\r\n    \"contact_email\": \"Fornecedor@teste.com\",\r\n    \"phone\": \"554988010148\",\r\n    \"status\": \"ativo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/suppliers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"suppliers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Supplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/suppliers/6874dc1f-cfe9-43ca-89e5-7d9203b3438f",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"6874dc1f-cfe9-43ca-89e5-7d9203b3438f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Suppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/suppliers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"suppliers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Supplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/suppliers/8771bcf3-89e6-4252-aafa-dfd9335b612d",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"8771bcf3-89e6-4252-aafa-dfd9335b612d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Supplier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Testando!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/suppliers/8771bcf3-89e6-4252-aafa-dfd9335b612d",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"8771bcf3-89e6-4252-aafa-dfd9335b612d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimentação de Estoque",
+			"item": [
+				{
+					"name": "Cadastrar Movimentação de Estoque",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tool_id\": \"a0ca8d40-6b2b-4790-a92a-2a284d292fb5\",\r\n    \"supplier_id\": \"b517a7ac-82e6-4e24-bc16-187fa315e09a\",\r\n    \"user_id\": \"e5f4ca1b-99f4-475c-b699-afaac7c9d06d\",\r\n    \"quantity\": 5,\r\n    \"reason\": \"ferramenta Quebrou\",\r\n    \"movement_type\": \"entrada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/stockMovement/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Movimentação de Estoque",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/stockMovement/6310f430-cacc-4d63-bb67-eced463d258b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								"6310f430-cacc-4d63-bb67-eced463d258b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Movimentação de Estoque by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stockMovement/1827a333-5f97-45bd-9c50-0e14a9825921",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								"1827a333-5f97-45bd-9c50-0e14a9825921"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Movimentação de Estoque",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stockMovement/1e45aa8b-4183-44e4-8cc2-8de261807868",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								"1e45aa8b-4183-44e4-8cc2-8de261807868"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisa e Paginação Movimentação de Estoque",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stockMovement/?filter=ferramenta Quebrou",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								""
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "ferramenta Quebrou"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todas as Movimentação de Estoque",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stockMovement/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stockMovement",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessions",
+			"item": [
+				{
+					"name": "Logar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"token@teste.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/session/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"session",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU3NTQ1NDAsImV4cCI6MTczNTg0MDk0MCwic3ViIjoiZDVkNmVkN2UtMDRkYi00NDMyLTk5YzQtM2E3NjMxYzQ4MzZjIn0.fIJgUAazCOQS3lfHo-oWDQ9tz-IiyDc1KWB05D4HXzo",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "localhost:3030",
+			"type": "string"
+		}
+	]
+}

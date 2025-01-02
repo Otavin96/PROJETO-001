@@ -4,13 +4,14 @@ import { getToolController } from '../controllers/get-tool.controller'
 import { DeleteToolController } from '../controllers/delete-tool.controller'
 import { updateToolController } from '../controllers/update-tool.controller'
 import { SearchToolController } from '../controllers/search-tool.controller'
+import { isAuth } from '@/common/infrastructure/http/middlewares/isAuth'
 
 const toolsRouter = Router()
 
-toolsRouter.post('/', createToolController)
-toolsRouter.get('/:id', getToolController)
-toolsRouter.delete('/:id', DeleteToolController)
-toolsRouter.put('/:id', updateToolController)
-toolsRouter.get('/', SearchToolController)
+toolsRouter.post('/', isAuth, createToolController)
+toolsRouter.get('/:id', isAuth, getToolController)
+toolsRouter.delete('/:id', isAuth, DeleteToolController)
+toolsRouter.put('/:id', isAuth, updateToolController)
+toolsRouter.get('/', isAuth, SearchToolController)
 
 export { toolsRouter }

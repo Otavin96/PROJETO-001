@@ -5,6 +5,7 @@ import { UpdateUserController } from '../controllers/update-user.controller'
 import { deleteUserController } from '../controllers/delete-user.controller'
 import { SearchUserController } from '../controllers/search-user.controller'
 import { sessionUserController } from '../controllers/session-user.controller'
+import { isAuth } from '@/common/infrastructure/http/middlewares/isAuth'
 
 const usersRouter = Router()
 
@@ -12,12 +13,12 @@ usersRouter.post('/', createUserController)
 
 usersRouter.post('/session/', sessionUserController)
 
-usersRouter.get('/:id', getUserController)
+usersRouter.get('/:id', isAuth, getUserController)
 
-usersRouter.put('/:id', UpdateUserController)
+usersRouter.put('/:id', isAuth, UpdateUserController)
 
-usersRouter.delete('/:id', deleteUserController)
+usersRouter.delete('/:id', isAuth, deleteUserController)
 
-usersRouter.get('/', SearchUserController)
+usersRouter.get('/', isAuth, SearchUserController)
 
 export { usersRouter }

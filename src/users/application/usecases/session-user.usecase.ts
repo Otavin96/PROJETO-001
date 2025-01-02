@@ -4,6 +4,8 @@ import { UsersRepository } from '@/users/repositories/users.repository'
 import { BadRequestError } from '@/common/domain/erros/bad-request-error'
 import { UnauthorizedError } from '@/common/domain/erros/unauthorized-error'
 import { compare } from 'bcrypt'
+import { sign } from 'jsonwebtoken'
+import { env } from '@/common/infrastructure/env/index'
 
 export namespace SessionUsersUseCase {
   export type Input = {
@@ -11,7 +13,10 @@ export namespace SessionUsersUseCase {
     password: string
   }
 
-  export type Output = UserOutput
+  export type Output = {
+    user: UserOutput
+    token: string
+  }
 
   @injectable()
   export class UseCase {
@@ -37,7 +42,15 @@ export namespace SessionUsersUseCase {
         throw new UnauthorizedError('Incorrect email/password')
       }
 
-      return user
+      const token = sign({}, env.MY_SECRET, {
+        subject: user.id,
+        expiresIn: '1d',
+      })
+
+      return {
+        user,
+        token,
+      }
     }
   }
 }
